@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="page-title">任务详情</view>
+  <view a:if="{{denyMessage}}" class="deny">{{denyMessage}}</view>
+  <block a:if="{{task}}">
+    <view class="card">
+      <view class="item-title">{{task.title}}</view>
+      <view class="muted">{{task.project_name}} · {{task.assignment_type === 'delegated' ? '交办' : '自建'}}</view>
+      <view class="muted">负责人：{{task.assignee.name}} · {{statusText[task.status]}}</view>
+      <view a:if="{{task.assistants.length}}" class="assist">
+        辅助人：
+        <text a:for="{{task.assistants}}">{{item.name}} </text>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">结果说明（完成时必填）</view>
+      <textarea class="input" value="{{resultText}}" onInput="onResult" placeholder="做了什么、结果如何" />
+    </view>
+
+    <view class="field-label">更新状态</view>
+    <view class="chips">
+      <view class="chip {{task.status === 'not_started' ? 'on' : ''}}" onTap="setStatus" data-status="not_started">未开始</view>
+      <view class="chip {{task.status === 'in_progress' ? 'on' : ''}}" onTap="setStatus" data-status="in_progress">进行中</view>
+      <view class="chip {{task.status === 'completed' ? 'on' : ''}}" onTap="setStatus" data-status="completed">完成</view>
+    </view>
+
+    <view class="btn-row">
+      <view class="btn-secondary" onTap="saveResult">保存结果</view>
+      <view class="btn" style="flex:1;margin:0" onTap="saveAndBack">保存并返回</view>
+    </view>
+
+    <view a:if="{{canManageAssist}}" class="field" style="margin-top:32rpx">
+      <view class="field-label">添加辅助人</view>
+      <searchable-picker
+        names="{{memberNames}}"
+        index="{{assistIndex}}"
+        placeholder="输入关键字搜索成员"
+        onChange="onAssistPick"
+      />
+      <view class="btn" style="margin-top:16rpx" onTap="addAssist">添加</view>
+    </view>
+
+    <view class="section-title" style="margin-top:32rpx">操作流水</view>
+    <view class="timeline">
+      <view a:for="{{events}}" class="event">
+        <view class="event-time">{{item.created_at}}</view>
+        <view class="event-body">{{item.actor.name}} · {{item.label}}</view>
+      </view>
+    </view>
+  </block>
+</view>

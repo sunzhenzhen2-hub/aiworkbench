@@ -1,0 +1,26 @@
+[Unit]
+Description=142 本机助手门禁（按登录名开个人工作区）
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/aiworkbench
+Environment=PYTHONPATH=/home/aiworkbench:/home/aiworkbench/backend
+Environment=PYTHONUNBUFFERED=1
+Environment=DSH_GATE_HOST=127.0.0.1
+Environment=DSH_GATE_PORT=3081
+Environment=DSH_USERS_ROOT=/var/lib/dsh/users
+Environment=DSH_PROFILES_SRC=/root/.dsh/profiles
+Environment=DSH_SHARED_ENV=/root/.dsh/.env
+Environment=DSH_GATE_PYTHON=/usr/bin/python3
+EnvironmentFile=-/home/aiworkbench/backend/.env
+EnvironmentFile=-/root/.dsh/.env
+ExecStart=/home/aiworkbench/backend/.venv/bin/python -m dsh_local_gate
+Restart=on-failure
+RestartSec=3
+SyslogIdentifier=dsh-gate
+
+[Install]
+WantedBy=multi-user.target

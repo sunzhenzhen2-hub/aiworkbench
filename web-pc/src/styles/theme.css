@@ -1,0 +1,214 @@
+/* 参考极简工具风：浅灰侧栏 + 白底主区 + 薄荷绿点缀 */
+
+:root {
+  --wb-font: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --wb-bg-page: #ffffff;
+  --wb-bg-sidebar: #f5f5f5;
+  --wb-bg-muted: #fafafa;
+  --wb-bg-active: #e8f5ef;
+  --wb-accent: #5bb98c;
+  --wb-accent-hover: #4aa67d;
+  --wb-text-primary: #222222;
+  --wb-text-secondary: #666666;
+  --wb-text-muted: #999999;
+  --wb-border: #ebebeb;
+  --wb-radius: 12px;
+  --wb-radius-pill: 999px;
+  --wb-shadow-soft: 0 2px 16px rgba(0, 0, 0, 0.04);
+  --wb-shadow-input: 0 0 0 1px rgba(91, 185, 140, 0.12), 0 4px 24px rgba(0, 0, 0, 0.04);
+
+  --el-color-primary: #5bb98c;
+  --el-color-primary-light-3: #8fd0ad;
+  --el-color-primary-light-5: #b3dfc8;
+  --el-color-primary-light-7: #d7efe3;
+  --el-color-primary-light-9: #eef8f2;
+  --el-color-primary-dark-2: #4aa67d;
+  /* 成功色与品牌薄荷绿对齐，避免 Element 默认 #67c23a */
+  --el-color-success: #5bb98c;
+  --el-color-success-light-3: #8fd0ad;
+  --el-color-success-light-5: #b3dfc8;
+  --el-color-success-light-7: #d7efe3;
+  --el-color-success-light-9: #eef8f2;
+  --el-color-success-dark-2: #4aa67d;
+  --el-font-family: var(--wb-font);
+  --el-border-radius-base: 10px;
+  --el-border-radius-small: 8px;
+  --el-border-radius-round: 20px;
+  --el-text-color-primary: #222222;
+  --el-text-color-regular: #666666;
+  --el-text-color-secondary: #999999;
+  --el-border-color: #ebebeb;
+  --el-border-color-light: #f0f0f0;
+  --el-fill-color-blank: #ffffff;
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: var(--wb-font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--wb-text-primary);
+  background: var(--wb-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 1280px;
+}
+
+.el-button {
+  font-family: var(--wb-font);
+  font-weight: 500;
+  border-radius: var(--wb-radius-pill);
+  border: none;
+  box-shadow: none;
+}
+
+.el-button--primary {
+  /* 与钉钉端主按钮薄荷绿对齐 */
+  --el-button-bg-color: var(--wb-accent);
+  --el-button-border-color: var(--wb-accent);
+  --el-button-hover-bg-color: var(--wb-accent-hover);
+  --el-button-hover-border-color: var(--wb-accent-hover);
+  --el-button-active-bg-color: var(--wb-accent-hover);
+  --el-button-text-color: #ffffff;
+}
+
+.el-button--default {
+  background: #f5f5f5;
+  border: 1px solid var(--wb-border);
+  color: var(--wb-text-primary);
+}
+
+.el-button.is-link {
+  color: var(--wb-text-secondary);
+  font-weight: 400;
+}
+
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+  border-radius: var(--wb-radius) !important;
+  box-shadow: 0 0 0 1px var(--wb-border) inset !important;
+  font-family: var(--wb-font);
+}
+
+.el-input__wrapper.is-focus,
+.el-select__wrapper.is-focused {
+  box-shadow: var(--wb-shadow-input) !important;
+}
+
+.el-card {
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius);
+  box-shadow: var(--wb-shadow-soft);
+  --el-card-padding: 20px;
+}
+
+.el-card__header {
+  border-bottom: 1px solid var(--wb-border);
+  font-weight: 600;
+  color: var(--wb-text-primary);
+}
+
+.el-table {
+  --el-table-border-color: var(--wb-border);
+  --el-table-header-bg-color: #fafafa;
+  font-family: var(--wb-font);
+}
+
+.el-table th.el-table__cell {
+  font-weight: 500;
+  color: var(--wb-text-secondary);
+  font-size: 13px;
+}
+
+.el-table .el-table__row:hover > td {
+  background: #fafafa !important;
+}
+
+.el-tabs__item {
+  font-family: var(--wb-font);
+  color: var(--wb-text-secondary);
+  font-weight: 500;
+}
+
+.el-tabs__item.is-active {
+  color: var(--wb-text-primary);
+  font-weight: 600;
+}
+
+.el-tabs__active-bar {
+  background: var(--wb-accent);
+}
+
+.el-dialog {
+  border-radius: var(--wb-radius);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+}
+
+.el-form-item__label {
+  font-family: var(--wb-font);
+  color: var(--wb-text-secondary);
+  font-weight: 500;
+}
+
+.wb-page-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--wb-text-primary);
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+
+.wb-page-desc {
+  font-size: 14px;
+  color: var(--wb-text-secondary);
+  margin: 0 0 24px;
+}
+
+.wb-stat-card {
+  background: #fff;
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius);
+  padding: 20px 24px;
+  box-shadow: var(--wb-shadow-soft);
+}
+
+.wb-stat-num {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--wb-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.wb-stat-label {
+  font-size: 13px;
+  color: var(--wb-text-muted);
+  margin-top: 6px;
+}
+
+.wb-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: var(--wb-radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.wb-tag--red { background: #fef0f0; color: #c45656; }
+.wb-tag--yellow { background: #fdf6ec; color: #b88230; }
+.wb-tag--green { background: var(--wb-bg-active); color: #3d9970; }
+.wb-tag--gray { background: #f5f5f5; color: #888; }

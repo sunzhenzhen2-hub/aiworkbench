@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "新增卡点",
+  "usingComponents": {
+    "searchable-picker": "/components/searchable-picker/searchable-picker"
+  }
+}

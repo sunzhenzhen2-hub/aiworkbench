@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/todo/todo",
+    "pages/report/report",
+    "pages/blocker/blocker",
+    "pages/task-detail/task-detail",
+    "pages/task-create/task-create",
+    "pages/bind/bind",
+    "pages/password/password"
+  ],
+  "window": {
+    "defaultTitle": "项目支撑工作台",
+    "titleBarColor": "#ffffff"
+  },
+  "tabBar": {
+    "textColor": "#666666",
+    "selectedColor": "#5bb98c",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "首页"
+      },
+      {
+        "pagePath": "pages/todo/todo",
+        "name": "待办"
+      },
+      {
+        "pagePath": "pages/report/report",
+        "name": "周报"
+      }
+    ]
+  }
+}

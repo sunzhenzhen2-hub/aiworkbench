@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "新建任务",
+  "usingComponents": {
+    "searchable-picker": "/components/searchable-picker/searchable-picker"
+  }
+}

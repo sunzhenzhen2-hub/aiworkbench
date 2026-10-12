@@ -1,0 +1,16 @@
+---
+description: 连新机器装 Cursor 远程时，从本机离线目录拷贝，禁止外网下载
+alwaysApply: true
+---
+
+# Cursor 远程服务端：先拷本机，不走外网
+
+新机器用 Cursor Remote SSH 时，**不要**让远端去 `downloads.cursor.com` / 应用市场在线安装。
+
+1. 离线包目录：`/home/workbench/offline/cursor-remote/`（大文件不进 git）
+2. 若目录里没有完整 `bin/linux-x64/<commit>/`（应约 400MB+），先从本机 `~/.cursor-server` 同步：
+   `bash /home/workbench/scripts/sync_cursor_offline_bundle.sh`
+3. 拷到新机器：
+   `bash /home/workbench/scripts/copy_cursor_server_to_host.sh <IP或主机名>`
+4. 拷完后写入远程 `argv.json` 的 `"locale": "en"`，并挡住应用市场域名；外网超时装中文包会让 Cursor 一直停在「打开远程中」
+5. 不要把 SSH 密码写进仓库、脚本或 README

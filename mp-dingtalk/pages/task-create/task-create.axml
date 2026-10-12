@@ -1,0 +1,46 @@
+<view class="page">
+  <view class="page-title">{{mode === 'delegated' ? '交办任务' : '自建任务'}}</view>
+  <view class="page-desc">{{mode === 'delegated' ? '指定负责人，可选辅助人' : '你就是负责人，可选辅助人'}}</view>
+  <view a:if="{{denyMessage}}" class="deny">{{denyMessage}}</view>
+
+  <view class="field">
+    <view class="field-label">项目</view>
+    <searchable-picker
+      names="{{projectNames}}"
+      index="{{projectIndex}}"
+      placeholder="输入关键字搜索项目"
+      onChange="onProject"
+    />
+  </view>
+  <view class="field">
+    <view class="field-label">标题</view>
+    <input class="input" value="{{title}}" onInput="onTitle" placeholder="任务名称" />
+  </view>
+  <view class="field">
+    <view class="field-label">截止日期</view>
+    <view class="input" onTap="pickDate">{{dueDate || '可选'}}</view>
+  </view>
+  <view a:if="{{mode === 'delegated'}}" class="field">
+    <view class="field-label">负责人</view>
+    <searchable-picker
+      names="{{memberNames}}"
+      index="{{ownerIndex}}"
+      placeholder="输入关键字搜索负责人"
+      onChange="onOwner"
+    />
+  </view>
+  <view class="field">
+    <view class="field-label">辅助人（可多选，点选切换）</view>
+    <input
+      class="input"
+      value="{{assistQuery}}"
+      placeholder="输入关键字筛选成员"
+      onInput="onAssistQuery"
+    />
+    <view a:for="{{filteredMembers}}" class="chip {{item.selected ? 'on' : ''}}" onTap="toggleAssist" data-id="{{item.id}}">
+      {{item.name}}
+    </view>
+    <view a:if="{{!filteredMembers.length}}" class="muted">无匹配成员</view>
+  </view>
+  <view class="btn" onTap="submit">创建</view>
+</view>

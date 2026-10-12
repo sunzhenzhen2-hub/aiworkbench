@@ -1,0 +1,35 @@
+---
+description: 联调/单测/E2E 结束后必须清理测试账号与测试项目，勿留脏数据污染正式库
+alwaysApply: true
+---
+
+# 测试完成后清理测试数据
+
+凡在本仓库做过会写入正式库（或共享开发库）的联调、手工验收、E2E、临时造数，**会话收尾前必须清理**测试账号与测试项目，不要留给下一轮脏数据。
+
+## 红线（先读）
+
+- **正式业务数据绝对不能动**（真实员工、真实立项、「日常任务」、正式周报/任务）
+- 清理前必须先备份：`bash /home/workbench/scripts/backup.sh`
+- 详见 [.cursor/rules/protect-production-data.mdc](protect-production-data.mdc)
+
+## 必做步骤
+
+1. 先备份正式库（只读导出，不改数据）
+2. 在 `backend` 目录先预览：
+ `PYTHONPATH=. .venv/bin/python ../scripts/purge_test_data.py --dry-run`
+3. 确认名单不含真实员工账号、真实业务项目（尤其保留「日常任务」）
+4. 再正式执行：
+ `PYTHONPATH=. .venv/bin/python ../scripts/purge_test_data.py`
+5. 在 README 会话总结里写清删除了多少账号/项目
+
+## 识别规则（脚本已有）
+
+- 账号：`t_` / `ta_` / `test_` / `e2e_` / `pv_` / `pd_` / `pr_` / `ra_` / `cl_` / `af_` 等前缀，以及演示账号 `manager` / `owner1` / `member1` / `member2`
+- 项目：名称含「测试」、`proj_` / `role_` / `phase_` / `cl_proj_` 等前缀、以及脚本内其它假项目名
+- **不要删**：「日常任务」及真实业务立项名
+
+## 注意
+
+- 单测若用独立测试库/事务回滚，可不跑 purge；只要数据进了共享/正式库，就必须清
+- 若 dry-run 误伤真实数据：先收紧 `scripts/purge_test_data.py` 规则，再执行；**宁可留脏测试数据，也不误删正式数据**

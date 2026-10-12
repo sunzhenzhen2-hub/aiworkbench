@@ -1,0 +1,20 @@
+[Unit]
+Description=项目支撑工作台 - PC + 钉钉 H5 前端构建发布
+Documentation=file:///home/aiworkbench/README.md
+After=network-online.target workbench-backend.service
+Wants=workbench-backend.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=root
+Group=root
+WorkingDirectory=/home/aiworkbench
+Environment=PATH=/usr/bin:/bin
+# 同时构建 PC 与钉钉手机 H5
+ExecStart=/bin/bash -c 'cd /home/aiworkbench/web-pc && /usr/bin/npm run build && cd /home/aiworkbench/web-dingtalk && /usr/bin/npm run build'
+StandardOutput=append:/home/aiworkbench/logs/frontend.log
+StandardError=append:/home/aiworkbench/logs/frontend.log
+
+[Install]
+WantedBy=multi-user.target

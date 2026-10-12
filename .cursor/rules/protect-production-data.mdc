@@ -1,0 +1,41 @@
+---
+description: 红线：正式业务数据不可改删；改库前先备份；定期自动备份
+alwaysApply: true
+---
+
+# 正式数据保护红线
+
+## 绝对禁止
+
+- **禁止**删除、改写、批量覆盖正式员工账号、真实业务项目、正式周报/任务
+- **禁止**对共享/正式库执行 `DROP` / `TRUNCATE` / 无筛选的批量 `DELETE` / `UPDATE`
+- **特别保留**：「日常任务」项目及钉钉同步的真实员工账号
+- 单测 / 联调造数只用测试前缀账号与假项目名；清理只用 `scripts/purge_test_data.py`，且必须先 `--dry-run`
+
+## 改库前必备份
+
+凡可能写入正式库（含 purge、迁移、手工 SQL、种子脚本）之前：
+
+```bash
+bash /home/workbench/scripts/backup.sh
+```
+
+确认 `backups/project_workbench_*.sql.gz` 新文件生成后再动手。
+
+## 定期备份
+
+- 已配置 systemd 定时器 `workbench-backup.timer`（每日约 02:30）
+- 备份目录：`/home/workbench/backups/`（只读导出，**不改库**）
+- 保留约 30 天；日志：`backups/backup.log`
+
+```bash
+systemctl status workbench-backup.timer
+ls -lt /home/workbench/backups/
+```
+
+## 清理测试数据时
+
+1. 先跑备份
+2. `purge_test_data.py --dry-run`，人眼确认无真实姓名/立项
+3. 再正式 purge
+4. README 写明删除数量；若 dry-run 有疑似真实数据 → **停止**，收紧规则后再说

@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "写周报",
+  "usingComponents": {
+    "searchable-picker": "/components/searchable-picker/searchable-picker"
+  }
+}

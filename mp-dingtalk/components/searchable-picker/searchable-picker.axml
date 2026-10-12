@@ -1,0 +1,26 @@
+<view class="sp">
+  <view class="input sp-trigger" onTap="onToggle">
+    <text class="sp-label {{label ? '' : 'placeholder'}}">{{label || placeholder}}</text>
+    <text class="sp-arrow">{{open ? '▲' : '▼'}}</text>
+  </view>
+  <view a:if="{{open}}" class="sp-panel">
+    <input
+      class="input sp-search"
+      type="text"
+      value="{{query}}"
+      placeholder="{{placeholder}}"
+      onInput="onQuery"
+    />
+    <scroll-view scroll-y class="sp-list">
+      <view
+        a:for="{{filtered}}"
+        class="sp-option {{item.index === index ? 'on' : ''}}"
+        data-index="{{item.index}}"
+        onTap="onPick"
+      >
+        {{item.name}}
+      </view>
+      <view a:if="{{!filtered.length}}" class="sp-empty">无匹配项</view>
+    </scroll-view>
+  </view>
+</view>

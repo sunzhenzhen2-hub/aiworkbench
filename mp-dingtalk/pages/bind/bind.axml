@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="page-title">绑定系统账号</view>
+  <view class="page-desc">管理员已给你开过钉钉门禁后，用电脑端的账号密码对上号，以后就不用再输。</view>
+  <view class="field">
+    <view class="field-label">用户名</view>
+    <input class="input" value="{{username}}" onInput="onUser" placeholder="系统用户名" />
+  </view>
+  <view class="field">
+    <view class="field-label">密码</view>
+    <input class="input" password value="{{password}}" onInput="onPass" placeholder="登录密码" />
+  </view>
+  <view class="btn" onTap="submit">绑定并进入</view>
+</view>

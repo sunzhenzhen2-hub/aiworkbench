@@ -1,0 +1,38 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets / local env（保留 *.example）
+backend/.env
+backend/.env.*
+!backend/.env.example
+web-pc/.env.local
+web-dingtalk/.env.local
+*.pem
+*.key
+
+# Node
+web-pc/node_modules/
+web-pc/dist/
+web-dingtalk/node_modules/
+web-dingtalk/dist/
+
+# Runtime / data / backups（勿进仓库）
+.pids/
+logs/
+backups/
+backend/data/solutions/
+backend/data/report_attachments/
+backend/data/task_attachments/
+
+# 周报原文（公开仓库不上传；仅留本机）
+docs/*周报汇总/
+docs/**/*周报*.xlsx
+docs/**/*周报*.xls
+
+# OS / tooling
+.DS_Store
+.firecrawl/
+*.log

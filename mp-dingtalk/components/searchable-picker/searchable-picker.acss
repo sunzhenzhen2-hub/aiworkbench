@@ -1,0 +1,56 @@
+.sp {
+  position: relative;
+}
+.sp-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+.sp-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sp-label.placeholder {
+  color: #999;
+}
+.sp-arrow {
+  flex-shrink: 0;
+  font-size: 22rpx;
+  color: #999;
+}
+.sp-panel {
+  margin-top: 12rpx;
+  border: 1rpx solid #ebebeb;
+  border-radius: 16rpx;
+  background: #fff;
+  overflow: hidden;
+}
+.sp-search {
+  border: none;
+  border-bottom: 1rpx solid #ebebeb;
+  border-radius: 0;
+}
+.sp-list {
+  max-height: 440rpx;
+}
+.sp-option {
+  padding: 24rpx 28rpx;
+  border-bottom: 1rpx solid #ebebeb;
+  font-size: 28rpx;
+  color: #222;
+}
+.sp-option:last-child {
+  border-bottom: none;
+}
+.sp-option.on {
+  background: #e8f5ef;
+  color: #4aa67d;
+}
+.sp-empty {
+  padding: 28rpx;
+  color: #999;
+  font-size: 26rpx;
+}

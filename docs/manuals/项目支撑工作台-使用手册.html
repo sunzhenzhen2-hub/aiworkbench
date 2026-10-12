@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>项目支撑工作台 · 使用手册</title>
+  <style>
+    :root {
+      --green: #2f7d57;
+      --green-soft: #e8f5ee;
+      --text: #1a1a1a;
+      --muted: #5c5c5c;
+      --border: #d8e5dd;
+      --bg: #f7faf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      background: #fff;
+      font-size: 15px;
+    }
+    .cover {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 56px;
+      background: linear-gradient(160deg, #e8f5ee 0%, #fff 55%, #f0f7f3 100%);
+      border-bottom: 4px solid var(--green);
+      page-break-after: always;
+    }
+    .cover h1 {
+      font-size: 36px;
+      margin: 0 0 12px;
+      color: var(--green);
+      letter-spacing: 0.02em;
+    }
+    .cover .sub {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .cover .meta {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      max-width: 520px;
+      box-shadow: 0 4px 16px rgba(47, 125, 87, 0.08);
+    }
+    .cover .meta dt {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+    .cover .meta dt:first-child { margin-top: 0; }
+    .cover .meta dd {
+      margin: 2px 0 0;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 40px 32px 64px; }
+    h2 {
+      font-size: 22px;
+      color: var(--green);
+      border-bottom: 2px solid var(--green-soft);
+      padding-bottom: 8px;
+      margin: 40px 0 16px;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-size: 17px;
+      margin: 28px 0 10px;
+      color: #244a38;
+      page-break-after: avoid;
+    }
+    h4 { font-size: 15px; margin: 18px 0 8px; }
+    p, li { color: #222; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .toc {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin: 24px 0 36px;
+    }
+    .toc ol { margin: 8px 0 0; padding-left: 22px; }
+    .toc a { color: var(--green); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 14px;
+      page-break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--green-soft); color: #1e4d35; }
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 12px 0 18px;
+      page-break-inside: avoid;
+    }
+    .card strong { color: var(--green); }
+    .step { counter-reset: step; list-style: none; padding: 0; }
+    .step li {
+      position: relative;
+      padding: 10px 12px 10px 48px;
+      margin: 8px 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      page-break-inside: avoid;
+    }
+    .step li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 26px;
+      text-align: center;
+    }
+    .url {
+      font-family: ui-monospace, Consolas, monospace;
+      background: #f0f4f2;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .tip {
+      border-left: 4px solid var(--green);
+      background: var(--green-soft);
+      padding: 10px 14px;
+      margin: 14px 0;
+      border-radius: 0 8px 8px 0;
+      page-break-inside: avoid;
+    }
+    .warn {
+      border-left: 4px solid #c45656;
+      background: #fdf2f2;
+      padding: 10px 14px;
+      margin: 14px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .role-tag {
+      display: inline-block;
+      background: var(--green-soft);
+      color: var(--green);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+    footer.manual-foot {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media print {
+      .cover { min-height: auto; padding: 60px 40px; }
+      a { color: inherit; text-decoration: none; }
+      .wrap { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 封面 -->
+  <section class="cover">
+    <p class="muted" style="margin:0 0 8px;letter-spacing:0.12em;text-transform:uppercase;">USER MANUAL</p>
+    <h1>项目支撑工作台</h1>
+    <p class="sub">使用手册（PC 端 · 钉钉端）</p>
+    <dl class="meta">
+      <dt>登录入口</dt>
+      <dd>https://app.fywasu.com:18090/</dd>
+      <dt>PC 工作台</dt>
+      <dd>https://app.fywasu.com:18090/workbench/</dd>
+      <dt>钉钉手机端</dt>
+      <dd>https://app.fywasu.com:18090/workbench/m/</dd>
+      <dt>适用对象</dt>
+      <dd>普通成员、项目负责人、部门负责人、系统管理员</dd>
+      <dt>文档版本</dt>
+      <dd>2026-09-14</dd>
+    </dl>
+  </section>
+
+  <div class="wrap">
+    <nav class="toc" id="toc">
+      <strong>目录</strong>
+      <ol>
+        <li><a href="#s1">这是什么系统</a></li>
+        <li><a href="#s2">怎么登录</a></li>
+        <li><a href="#s3">角色与权限（看懂自己能做什么）</a></li>
+        <li><a href="#s4">PC 端使用说明</a></li>
+        <li><a href="#s5">钉钉端使用说明</a></li>
+        <li><a href="#s6">日常工作怎么做（按场景）</a></li>
+        <li><a href="#s7">常见问题</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s1">1. 这是什么系统</h2>
+    <p>
+      「项目支撑工作台」帮助小团队管理<strong>多个项目、任务、周报/日报</strong>。
+      电脑浏览器打开 PC 端；手机在钉钉里打开 H5 页面。两边数据是通的：电脑交办的任务，手机待办里也能看到。
+    </p>
+    <div class="card">
+      <strong>一句话记住：</strong>
+      打开就能看到「今天该看什么」和自己的待办；写任务会自动进周报草稿；写周报/做任务后可以看对自己的评价。
+    </div>
+
+    <h2 id="s2">2. 怎么登录</h2>
+    <h3>2.1 地址一览</h3>
+    <table>
+      <thead>
+        <tr><th>入口</th><th>地址</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>统一登录入口</td>
+          <td><span class="url">https://app.fywasu.com:18090/</span></td>
+          <td>浏览器打开后进入工作台登录</td>
+        </tr>
+        <tr>
+          <td>PC 工作台</td>
+          <td><span class="url">https://app.fywasu.com:18090/workbench/</span></td>
+          <td>电脑浏览器：钉钉扫码或账号密码</td>
+        </tr>
+        <tr>
+          <td>钉钉手机端</td>
+          <td><span class="url">https://app.fywasu.com:18090/workbench/m/</span></td>
+          <td>钉钉内打开，一般可免登</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2.2 PC：钉钉扫码（推荐）</h3>
+    <ol class="step">
+      <li>用电脑浏览器打开 PC 地址，默认看到「钉钉扫码」。</li>
+      <li>打开手机钉钉，扫描页面上的二维码并确认。</li>
+      <li>账号已绑定且有「钉钉免登」权限 → 直接进入个人工作台。</li>
+      <li>若提示未绑定：用系统账号 + 密码绑一次即可（同样需要免登权限）。</li>
+    </ol>
+
+    <h3>2.3 PC：账号密码</h3>
+    <ol class="step">
+      <li>在登录页切换到「账号密码」。</li>
+      <li>输入管理员发放的用户名与密码。</li>
+      <li><strong>首次登录必须改密</strong>：新密码至少 8 位，需同时包含大写字母、小写字母和数字。</li>
+    </ol>
+    <div class="tip">
+      自愿改密：登录后点右上角<strong>姓名</strong> →「修改密码」。
+    </div>
+
+    <h3>2.4 钉钉端登录</h3>
+    <ol class="step">
+      <li>在钉钉工作台打开「项目支撑工作台」应用（由管理员配置移动端首页）。</li>
+      <li>已授权免登时，打开即可进入，无需再输密码。</li>
+      <li>若无法免登，按页面提示用系统账号绑定，或联系管理员开通「钉钉免登」并绑定钉钉账号。</li>
+    </ol>
+
+    <h2 id="s3">3. 角色与权限</h2>
+    <p>不同角色看到的菜单和数字不一样，用生活例子理解：</p>
+    <table>
+      <thead>
+        <tr><th>角色</th><th>大概能做什么</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="role-tag">普通成员</span></td>
+          <td>看全部项目列表；管自己的任务/周报/待办；看对自己的评价。不能看别人周报。</td>
+        </tr>
+        <tr>
+          <td><span class="role-tag">项目负责人</span></td>
+          <td>在普通成员基础上，可交办任务；可改<strong>自己负责</strong>的项目信息。</td>
+        </tr>
+        <tr>
+          <td><span class="role-tag">部门负责人</span></td>
+          <td>看团队概览（全部任务、周报提交、重点项目/任务、质量告警、部门待办）；可看全员周报工作台。</td>
+        </tr>
+        <tr>
+          <td><span class="role-tag">系统管理员</span></td>
+          <td>部门负责人能力 + 用户/角色/模型等系统管理。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      <strong>看全部 ≠ 改全部：</strong>大家都能看项目列表；改项目名称/类型，一般只有该项目负责人或管理员可以。
+    </div>
+
+    <h2 id="s4">4. PC 端使用说明</h2>
+    <p>登录后默认进入<strong>个人工作台</strong>。左侧是菜单，右上角点姓名可改密或退出。</p>
+
+    <h3>4.1 个人工作台（首页）</h3>
+    <ul>
+      <li><strong>今天该看什么</strong>：AI 根据当前情况写一段白话提醒（文字会慢慢出来，不用干等转圈）。</li>
+      <li><strong>我的概览 / 团队概览</strong>：
+        <ul>
+          <li>普通成员：我的任务、本周周报、我的项目、个人待办。</li>
+          <li>部门负责人 / 超管：全部任务、团队周报、全部项目、部门待办，以及<strong>重点项目、重点任务、质量告警</strong>。</li>
+        </ul>
+      </li>
+      <li><strong>常用操作</strong>：写任务、写周报/日报、看评价、项目管理、周报工作台（有权限才显示）等快捷按钮。</li>
+      <li><strong>与我相关</strong>：待办任务、卡点跟进、我的项目列表。</li>
+      <li><strong>团队 · 部门待办</strong>（仅管理者）：其他人未完成的待办，方便催办。</li>
+    </ul>
+
+    <h3>4.2 项目管理</h3>
+    <ul>
+      <li>查看全部项目的分级、阶段、卡点、任务完成率、周报情况。</li>
+      <li>可按「重点 / 普通 / 日常」、类型、名称筛选。</li>
+      <li>有权限时可新建项目；负责人/管理员可编辑项目名称与类型。</li>
+      <li>项目类型目前为三类：<strong>软件开发 / 系统集成 / 集众融合</strong>。</li>
+      <li>点进项目可看阶段、卡点、任务与成员角色。</li>
+    </ul>
+    <div class="warn">
+      请按真实立项名称建项目；杂项工作请归入系统内的「日常任务」，不要随便起假名。
+    </div>
+
+    <h3>4.3 写任务</h3>
+    <ol class="step">
+      <li>侧栏点「写任务」（需自建任务权限）。</li>
+      <li>填写：关联项目、标题、目标（做成什么样）、时间、任务级别（P0～P4）。</li>
+      <li>可选：自己做，或<strong>交办</strong>给同事（管理者/项目负责人）。</li>
+      <li>保存后：进入对方/自己的待办，并<strong>自动写入本周周报草稿</strong>（本周已提交的周报不会被改）。</li>
+    </ol>
+
+    <h3>4.4 写周报 / 日报</h3>
+    <ul>
+      <li><strong>日报</strong>：当天记录，看板显示已记/未记，不催办、不考核。</li>
+      <li><strong>周报</strong>：正式汇总；可写做成了什么、有无卡点、下一步计划。</li>
+      <li>支持 AI 帮忙整理结构（点「采用」才写入）；提交后「下一步」可进入本人待办。</li>
+      <li>填写标准详见系统内说明；结果尽量写具体，少用「推进中」「已完成」这种空话。</li>
+    </ul>
+
+    <h3>4.5 看评价</h3>
+    <p>侧栏「看评价」：查看自己周报的一阶段评价、自己负责任务/辅助任务的评价。没有内容时，先提交周报或完善任务再回来看。</p>
+
+    <h3>4.6 周报工作台（管理者）</h3>
+    <p>需「查看所有周报」权限。可看全员提交情况、质量告警、催办未交周报（系统管理员账号一般不计入应提交名单）。</p>
+
+    <h3>4.7 方案库</h3>
+    <p>有权限时可查阅、上传历史方案，便于复用经验。</p>
+
+    <h3>4.8 系统管理（管理员）</h3>
+    <ul>
+      <li>用户管理、角色权限、审计、模型管理等。</li>
+      <li>给角色勾选「钉钉免登」后，员工才能用钉钉扫码/免登。</li>
+    </ul>
+
+    <h2 id="s5">5. 钉钉端使用说明</h2>
+    <p>底部四个 Tab：<strong>首页 · 待办 · 周报 · 我的</strong>。</p>
+
+    <h3>5.1 首页</h3>
+    <ul>
+      <li>快捷入口：写任务、看周报、写周报、项目管理等（随权限变化）。</li>
+      <li>可看待办摘要、部门待办（管理者）、卡点与项目入口。</li>
+      <li>有权限者可进入周报看板看全员情况。</li>
+    </ul>
+
+    <h3>5.2 待办</h3>
+    <ul>
+      <li>我的未完成任务；可点进详情改状态、填结果。</li>
+      <li>管理者可看「部门待办」汇总。</li>
+    </ul>
+
+    <h3>5.3 周报</h3>
+    <ul>
+      <li>底部「周报」进入<strong>我的周报</strong>：历史周期、正文与评价；可再点「写周报」。</li>
+      <li>首页「看周报」同样进我的周报；「写周报」直达填写页。</li>
+    </ul>
+
+    <h3>5.4 我的</h3>
+    <ul>
+      <li>查看姓名、角色、钉钉绑定状态。</li>
+      <li>「看评价」入口在此；也可改密相关能力（以页面实际为准）。</li>
+    </ul>
+
+    <div class="tip">
+      钉钉端与 PC 端共用同一套后台数据。电脑上交办给你的任务，手机「待办」里马上能跟进。
+    </div>
+
+    <h2 id="s6">6. 日常工作怎么做（按场景）</h2>
+
+    <h3>场景 A：今天开始干活</h3>
+    <ol class="step">
+      <li>打开 PC 个人工作台或钉钉首页。</li>
+      <li>先看「今天该看什么」和待办列表。</li>
+      <li>有交办未接收的，先接收再干。</li>
+    </ol>
+
+    <h3>场景 B：给自己或同事建任务</h3>
+    <ol class="step">
+      <li>写任务：定项目、目标、时间、级别。</li>
+      <li>保存 → 进待办 + 进本周周报草稿。</li>
+      <li>交办时，对方待办与部门待办（管理者）都会出现。</li>
+    </ol>
+
+    <h3>场景 C：周五写周报</h3>
+    <ol class="step">
+      <li>打开「写周报/日报」，核对自动带入的任务卡。</li>
+      <li>补全结果、卡点、下一步；可用 AI 整理后点采用。</li>
+      <li>提交。之后可在「看评价 / 我的周报」里看反馈。</li>
+    </ol>
+
+    <h3>场景 D：管理者盯风险</h3>
+    <ol class="step">
+      <li>个人工作台看团队概览：周报是否齐、重点任务、质量告警、部门待办。</li>
+      <li>点质量告警 / 重点任务看明细；必要时进周报工作台催办。</li>
+      <li>项目管理页看重点项目与卡点。</li>
+    </ol>
+
+    <h2 id="s7">7. 常见问题</h2>
+    <table>
+      <thead>
+        <tr><th>现象</th><th>可能原因与处理</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>扫码后进不去</td>
+          <td>角色未勾选「钉钉免登」，或未绑定钉钉账号 → 找管理员开通并绑定。</td>
+        </tr>
+        <tr>
+          <td>强制改密过不去</td>
+          <td>新密码须 ≥8 位，且含大写、小写、数字。</td>
+        </tr>
+        <tr>
+          <td>看不到周报工作台</td>
+          <td>需要「查看所有周报」权限（部门负责人通常有，普通成员没有）。</td>
+        </tr>
+        <tr>
+          <td>团队概览仍是「我的」四张卡</td>
+          <td>当前账号不是部门负责人/系统管理员，或权限未生效 → 重新登录或联系管理员。</td>
+        </tr>
+        <tr>
+          <td>任务没进周报</td>
+          <td>本周周报若已提交，新任务不会改已交内容；可下周再体现，或在草稿阶段保存任务。</td>
+        </tr>
+        <tr>
+          <td>钉钉页还是旧的</td>
+          <td>强制刷新或清缓存后再打开 <span class="url">…/workbench/m/</span>。</td>
+        </tr>
+        <tr>
+          <td>打不开地址</td>
+          <td>确认使用 <span class="url">https://app.fywasu.com:18090/</span>，检查网络/VPN 与证书提示是否需信任。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <strong>还需要帮助？</strong>
+      把「哪一端（PC/钉钉）+ 用的哪个账号角色 + 截图」发给系统管理员，排查会更快。
+    </div>
+
+    <footer class="manual-foot">
+      项目支撑工作台 · 使用手册 · 2026-09-14<br />
+      登录入口：https://app.fywasu.com:18090/ &nbsp;|&nbsp;
+      HTML / PDF 文档位于 docs/manuals/
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.stats {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+.stat {
+  flex: 1;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.num {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #222222;
+}
+.num.warn { color: #c45656; }
+.label { color: #999999; font-size: 24rpx; }
+.menu-item {
+  font-weight: 500;
+  text-align: center;
+}

@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="page-title">写周报</view>
+  <view class="page-desc">三问：做成了什么 / 有无卡点 / 下一步哪天完成（与电脑端同步）</view>
+  <view a:if="{{denyMessage}}" class="deny">{{denyMessage}}</view>
+
+  <view class="field">
+    <view class="field-label">项目</view>
+    <searchable-picker
+      names="{{projectNames}}"
+      index="{{projectIndex}}"
+      placeholder="输入关键字搜索项目"
+      onChange="onProject"
+    />
+  </view>
+  <view class="field">
+    <view class="field-label">1. 做成了什么</view>
+    <textarea class="input" value="{{result_text}}" onInput="onResult" placeholder="尽量写具体结果，避免只写开会/推进中" />
+  </view>
+  <view class="field">
+    <view class="field-label">2. 有无卡点</view>
+    <view class="chip {{stuck ? 'on' : ''}}" onTap="onStuckToggle">{{stuck ? '有卡点（点此取消）' : '无卡点（点此展开）'}}</view>
+    <textarea a:if="{{stuck}}" class="input" style="margin-top:12rpx" value="{{stuck_detail}}" onInput="onStuckDetail" placeholder="卡在哪里" />
+  </view>
+  <view class="field">
+    <view class="field-label">3. 下一步 + 哪天完成</view>
+    <textarea class="input" value="{{next_goal}}" onInput="onGoal" placeholder="下一步要做成什么" />
+    <view class="input" style="margin-top:12rpx" onTap="pickDue">完成日期：{{next_due_date || '请选择'}}</view>
+  </view>
+  <view class="btn" onTap="submit">提交周报</view>
+</view>

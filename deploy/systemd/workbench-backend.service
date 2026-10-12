@@ -1,0 +1,22 @@
+[Unit]
+Description=项目支撑工作台 - 后端 API (FastAPI)
+Documentation=file:///home/aiworkbench/README.md
+After=network-online.target postgresql.service
+Wants=network-online.target
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/home/aiworkbench/backend
+Environment=PATH=/home/aiworkbench/backend/.venv/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONPATH=/home/aiworkbench/backend
+ExecStart=/home/aiworkbench/backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8100
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/home/aiworkbench/logs/backend.log
+StandardError=append:/home/aiworkbench/logs/backend.log
+
+[Install]
+WantedBy=multi-user.target

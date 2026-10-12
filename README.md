@@ -7609,3 +7609,33 @@ Git、SSH、GitHub
 
 ### 测试数据
 - 无
+
+## 会话总结（2026-10-12）— 同步到 GitHub（完成）
+
+### 会话的主要目的
+把 142 `/home/aiworkbench` 推到 GitHub；仓库公开，但周报原文不公开。
+
+### 完成的主要任务
+- 用户添加本机 SSH 公钥后认证成功（账号 `sunzhenzhen2-hub`）
+- `git init` + 首次提交；`.gitignore` 排除密钥、依赖、备份、运行数据
+- 按用户要求：**公开仓库**，并从提交中移除 `docs/*周报汇总/` 下员工周报 Excel（本机仍保留）
+- 用户在 GitHub 新建空仓库后，已 `git push -u origin main` 成功
+
+### 关键决策和解决方案
+- 远程：`git@github.com:sunzhenzhen2-hub/aiworkbench.git`（Public）
+- 周报汇总目录与 `*周报*.xlsx/xls` 写入 `.gitignore`，避免以后误传
+- 密钥仍只留服务器（`backend/.env` 等不进仓库）
+
+### 使用的技术栈
+Git、SSH、GitHub
+
+### 修改了哪些文件
+- `.gitignore`
+- `README.md`（本条及上条受阻记录）
+- 本地 Git 仓库与远程 `origin/main`
+
+### 测试数据
+- 无；未改业务库、未 purge
+
+### 仓库地址
+- https://github.com/sunzhenzhen2-hub/aiworkbench
